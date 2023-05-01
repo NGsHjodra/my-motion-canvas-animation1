@@ -12,11 +12,17 @@ import {all, waitFor} from '@motion-canvas/core/lib/flow';
 export default makeScene2D(function* (view) {
   const codeRef = createRef<CodeBlock>();
 
+  view.fill('#242424');
+  yield* view.fill('#040404', 0.6);
+
   yield view.add(<CodeBlock language="python" ref={codeRef} code={`name = "NGs"`} />);
 
-  yield* codeRef().edit(1.2, true)`name = "NGs"${insert('\nage = 19')}`; 
+  yield* codeRef().edit(1.2, true)`name = "NGs"${insert('\nyt = "https://www.youtube.com/@NGs-Hjodra"')}`; 
   yield* waitFor(0.6);
-  yield* codeRef().edit(1.2, true)`name = "NGs"\nage = 19${insert('\nlink = "https://github.com/NGsHjodra"')}`;// https://www.youtube.com/@NGs-Hjodra
+  yield* codeRef().edit(1.2, true)`name = "NGs"\nyt = "https://www.youtube.com/@NGs-Hjodra"${insert('\ngithub = "https://github.com/NGsHjodra"')}`;// https://www.youtube.com/@NGs-Hjodra
+  yield* waitFor(0.6);
+  // yield* codeRef().edit(1.2, false)`name = "NGs"\nyt = "https://www.youtube.com/@NGs-Hjodra"\ngithub = "https://github.com/NGsHjodra"`;
+  yield* codeRef().selection(lines(0, Infinity), 1.2);
   yield* waitFor(0.6);
   // yield* codeRef().edit(1.2)`var myBool = ${edit('true', 'false')};`;
   // yield* waitFor(0.6);
